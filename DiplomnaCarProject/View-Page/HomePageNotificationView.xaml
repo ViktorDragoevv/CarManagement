@@ -1,0 +1,396 @@
+﻿<Page
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:DiplomnaCarProject.View_Page"
+      xmlns:DiplomnaCarProject="clr-namespace:DiplomnaCarProject" x:Class="DiplomnaCarProject.View_Page.HomePageNotificationView"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="HomePageNotificationView" Loaded="Page_Loaded" 
+    xmlns:l="clr-namespace:DiplomnaCarProject"
+    
+    >
+
+    <Page.Resources>
+        <DiplomnaCarProject:DataSet1 x:Key="dataSet1"/>
+        <CollectionViewSource x:Key="homeDebugViewSource" Source="{Binding homeDebug, Source={StaticResource dataSet1}}"/>
+        <l:NotificationConverter x:Key="c"></l:NotificationConverter>
+    </Page.Resources>
+
+    <Grid DataContext="{StaticResource homeDebugViewSource}">
+
+
+
+        <DataGrid x:Name="homeDebugDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected"  ItemsSource="{Binding}" EnableRowVirtualization="True" AutoGenerateColumns="False" IsReadOnly="True"  >
+
+            <DataGrid.RowStyle>
+                <Style TargetType="DataGridRow">
+                    <Style.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Background" Value="Transparent" />
+                            <Setter Property="Foreground" Value="Transparent" />
+                            <Setter Property="BorderBrush" Value="Transparent"></Setter>
+                            <Setter Property="TextBlock.Background" Value="Transparent"></Setter>
+                            
+                        </Trigger>
+
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="Transparent"/>
+                        </Trigger>
+                    </Style.Triggers>
+                   
+                </Style>
+                
+
+            </DataGrid.RowStyle>
+            <DataGrid.CellStyle>
+                <Style TargetType="DataGridCell">
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="Foreground" Value="Black" />
+                    <Style.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            
+                            <Setter Property="Background" Value="Transparent"></Setter>
+                            <Setter Property="BorderBrush" Value="Transparent"></Setter>
+                            <Setter Property="TextBlock.Background" Value="Transparent"></Setter>
+
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Foreground" Value="Red" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.CellStyle>
+
+
+            <DataGrid.Resources>
+
+               
+
+
+                <ContextMenu x:Key="contextMenu">
+                    <MenuItem Name="d" Header="Добавяне на нов ред"  />
+
+
+                    <MenuItem Header="Редактиране на избрания ред"  />
+
+
+                </ContextMenu>
+
+
+               <!-- <Style TargetType="{x:Type DataGridCell}">
+                    <Style.Triggers>
+                        <Trigger Property="DataGridCell.IsSelected" Value="True">
+                            <Setter Property="Background" Value="#CCDAFF" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>-->
+                
+                
+
+                <l:NotificationConverter x:Key="c"></l:NotificationConverter>
+                <Style TargetType="DataGridCell" x:Key="FlashStyle">
+                    <Setter Property="Background">
+                        <Setter.Value>
+                            <SolidColorBrush Color="Transparent"/>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <DataTrigger 
+                    Binding="{Binding Гражданска, 
+                    Converter={StaticResource c}}" 
+                    Value="1" >
+                            <DataTrigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard 
+                                x:Name="Blink" 
+                                AutoReverse="True" 
+                                RepeatBehavior="Forever">
+                                        <ColorAnimationUsingKeyFrames 
+                                    BeginTime="00:00:00"
+                                    Storyboard.TargetProperty="(Background).(SolidColorBrush.Color)">
+                                            <EasingColorKeyFrame 
+                                        KeyTime="00:00:01" 
+                                        Value="red" />
+                                        </ColorAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </DataTrigger.EnterActions>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Гражданска , Converter={StaticResource c}}"  Value="-1" >
+
+                            <Setter Property="Background" Value="red"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Гражданска , Converter={StaticResource c}}"  Value="0" >
+
+                            <Setter Property="Background" Value="Yellow"/>
+                        </DataTrigger>
+
+
+                    </Style.Triggers>
+
+                </Style>
+                <Style TargetType="DataGridCell" x:Key="FlashStyleVinetka">
+                    <Setter Property="Background">
+                        <Setter.Value>
+                            <SolidColorBrush Color="Transparent"/>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <DataTrigger 
+                    Binding="{Binding Винетка, 
+                    Converter={StaticResource c}}" 
+                    Value="1" >
+                            <DataTrigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard 
+                                x:Name="Blink" 
+                                AutoReverse="True" 
+                                RepeatBehavior="Forever">
+                                        <ColorAnimationUsingKeyFrames 
+                                    BeginTime="00:00:00"
+                                    Storyboard.TargetProperty="(Background).(SolidColorBrush.Color)">
+                                            <EasingColorKeyFrame 
+                                        KeyTime="00:00:01" 
+                                        Value="red" />
+                                        </ColorAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </DataTrigger.EnterActions>
+
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Винетка , Converter={StaticResource c}}"  Value="-1" >
+
+                            <Setter Property="Background" Value="red"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Винетка , Converter={StaticResource c}}"  Value="0" >
+
+                            <Setter Property="Background" Value="Yellow"/>
+                        </DataTrigger>
+
+
+                    </Style.Triggers>
+
+                </Style>
+                <Style TargetType="DataGridCell" x:Key="FlashStylePregled">
+                    <Setter Property="Background">
+                        <Setter.Value>
+                            <SolidColorBrush Color="Transparent"/>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <DataTrigger 
+                    Binding="{Binding Преглед, 
+                    Converter={StaticResource c}}" 
+                    Value="1" >
+                            <DataTrigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard 
+                                x:Name="Blink" 
+                                AutoReverse="True" 
+                                RepeatBehavior="Forever">
+                                        <ColorAnimationUsingKeyFrames 
+                                    BeginTime="00:00:00"
+                                    Storyboard.TargetProperty="(Background).(SolidColorBrush.Color)">
+                                            <EasingColorKeyFrame 
+                                        KeyTime="00:00:01" 
+                                        Value="red" />
+                                        </ColorAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </DataTrigger.EnterActions>
+
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Преглед , Converter={StaticResource c}}"  Value="-1" >
+
+                            <Setter Property="Background" Value="red"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Преглед , Converter={StaticResource c}}"  Value="0" >
+
+                            <Setter Property="Background" Value="Yellow"/>
+                        </DataTrigger>
+
+
+                    </Style.Triggers>
+
+                </Style>
+                <Style TargetType="DataGridCell" x:Key="FlashStyleKasko">
+                    <Setter Property="Background">
+                        <Setter.Value>
+                            <SolidColorBrush Color="Transparent"/>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <DataTrigger 
+                    Binding="{Binding Каско, 
+                    Converter={StaticResource c}}" 
+                    Value="1" >
+                            <DataTrigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard 
+                                x:Name="Blink" 
+                                AutoReverse="True" 
+                                RepeatBehavior="Forever">
+                                        <ColorAnimationUsingKeyFrames 
+                                    BeginTime="00:00:00"
+                                    Storyboard.TargetProperty="(Background).(SolidColorBrush.Color)">
+                                            <EasingColorKeyFrame 
+                                        KeyTime="00:00:01" 
+                                        Value="red" />
+                                        </ColorAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </DataTrigger.EnterActions>
+
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Каско , Converter={StaticResource c}}"  Value="-1" >
+
+                            <Setter Property="Background" Value="red"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Каско , Converter={StaticResource c}}"  Value="0" >
+
+                            <Setter Property="Background" Value="Yellow"/>
+                        </DataTrigger>
+
+
+                    </Style.Triggers>
+
+                </Style>
+
+                <Style TargetType="DataGrid">
+                    <Setter Property="Background">
+                        <Setter.Value>
+                            <LinearGradientBrush  StartPoint="0,0" EndPoint="0,1">
+                                <GradientStop Offset="0" Color="#FF31577E"/>
+                                <GradientStop Offset="0.5" Color="#FF5C99D6"/>
+                                <GradientStop Offset="1" Color="White"  />
+                            </LinearGradientBrush>
+                        </Setter.Value>
+
+                    </Setter>
+                </Style>
+                <Style TargetType="DataGridColumnHeader">
+                    <Setter Property="FontSize" Value="20"/>
+                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                    <Setter Property="Background" Value="#FF31577E"/>
+                    <Setter Property="Foreground" Value="White"/>
+                </Style>
+               
+
+
+            </DataGrid.Resources>
+
+           
+
+            <DataGrid.Columns>
+                <DataGridTextColumn x:Name="idcarsColumn" Width="*" Header="idcars" Binding="{Binding idcars}" Visibility="Hidden"/>
+                <DataGridTemplateColumn Header="Снимка" Width="160" x:Name="iii"
+                            IsReadOnly="True">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding image }" x:Name="img"  />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+
+                <!-- <DataGridTextColumn x:Name="regNColumn" Width="*" Header="reg N" Binding="{Binding regN}" FontSize="18" Foreground="Black"  FontWeight="Bold"/>-->
+                <DataGridTemplateColumn Width="*"  Header="Рег.№" >
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding regN }" x:Name="regN" FontSize="18" Foreground="Black"  FontWeight="Bold" >
+                                <TextBlock.ContextMenu>
+                                    <ContextMenu>
+                                        <MenuItem Header="Профил"  Click="ShowProfile_Click"/>
+                                        
+                                    </ContextMenu>
+                                </TextBlock.ContextMenu>
+                            </TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn Width="*" CellStyle="{StaticResource FlashStyle}" Header="Гражданска" >
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Гражданска , StringFormat=\{0:dd.MM.yyyy\}}" x:Name="винеткаColumnn" FontSize="18" Foreground="Black"  FontWeight="Bold" >
+                                <TextBlock.ContextMenu>
+                                    <ContextMenu>
+                                        <MenuItem Header="Профил"  Click="ShowProfile_Click"/>
+                                        <MenuItem Header="Добавяне на гражданска" Click="AddGrajdanska_Click"/>
+                                        
+                                    </ContextMenu>
+                                </TextBlock.ContextMenu>
+                            </TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Width="*" CellStyle="{StaticResource FlashStyleVinetka}" Header="Винетка">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Винетка , StringFormat=\{0:dd.MM.yyyy\}}" x:Name="винеткаColumnn" FontSize="18" Foreground="Black"  FontWeight="Bold" >
+                                <TextBlock.ContextMenu>
+                                    <ContextMenu>
+                                        <MenuItem Header="Профил" Click="ShowProfile_Click"/>
+                                        <MenuItem Header="Добавяне на Винетка" Click="AddVinetka_Click_1"/>
+                                    </ContextMenu>
+                                </TextBlock.ContextMenu>
+                            </TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Width="*" CellStyle="{StaticResource FlashStylePregled}" Header="Преглед">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Преглед , StringFormat=\{0:dd.MM.yyyy\}}" x:Name="винеткаColumnn" FontSize="18" Foreground="Black"  FontWeight="Bold" >
+                                <TextBlock.ContextMenu>
+                                    <ContextMenu>
+                                        <MenuItem Header="Профил" Click="ShowProfile_Click"/>
+                                        <MenuItem Header="Добавяне на Преглед" Click="AddPregled_Click"/>
+                                    </ContextMenu>
+                                </TextBlock.ContextMenu>
+                            </TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Width="*" CellStyle="{StaticResource FlashStyleKasko}" Header="Каско">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Каско , StringFormat=\{0:dd.MM.yyyy\}}" x:Name="винеткаColumnn" FontSize="18" Foreground="Black"  FontWeight="Bold" >
+                                <TextBlock.ContextMenu>
+                                    <ContextMenu>
+                                        <MenuItem Header="Профил" Click="ShowProfile_Click"/>
+                                        <MenuItem Header="Дпбавяне на Каско" Click="AddKasko_Click_1"/>
+                                    </ContextMenu>
+                                </TextBlock.ContextMenu>
+                            </TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+
+
+
+            </DataGrid.Columns>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </DataGrid>
+
+
+
+    </Grid>
+</Page>

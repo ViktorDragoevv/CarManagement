@@ -1,0 +1,93 @@
+﻿<Page
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:DiplomnaCarProject.View_Page"
+      xmlns:DiplomnaCarProject="clr-namespace:DiplomnaCarProject" x:Class="DiplomnaCarProject.View_Page.ConsumableView"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="ConsumableView" Loaded="Page_Loaded">
+
+    <Page.Resources>
+        <DiplomnaCarProject:DataSet1 x:Key="dataSet1"/>
+        <CollectionViewSource x:Key="consumablesJoinViewSource" Source="{Binding ConsumablesJoin, Source={StaticResource dataSet1}}"/>
+    </Page.Resources>
+   
+        <Grid DataContext="{StaticResource consumablesJoinViewSource}" Margin="0,0,0,-44">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="32"/>
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Row="0">
+                <Menu Height="32" >
+                    <MenuItem  Header="_Добави" Click="AddMeasure_Click" Height="32"/>
+                    <MenuItem  Header="_Редактирай" Click="editMeasure_Click" Height="32"/>
+                    <MenuItem  Header="_Изтрий" Click="deleteMeasure_Click" Height="32"/>
+
+                </Menu>
+            </StackPanel>
+            <StackPanel Grid.Row="1" />
+
+
+
+            <DataGrid x:Name="consumablesJoinDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" Grid.Row="1"  ItemsSource="{Binding}" EnableRowVirtualization="True" AutoGenerateColumns="False"  IsReadOnly="True">
+                <DataGrid.Columns>
+                    <DataGridTextColumn x:Name="idConsumablesColumn" Width="*" Header="id Consumables" Binding="{Binding idConsumables}" Visibility="Hidden"/>
+                    <DataGridTextColumn x:Name="notifyColumn" Width="*" Header="notify" Binding="{Binding notify}" Visibility="Hidden"/>
+                    <DataGridTextColumn x:Name="consumableNameColumn" Width="*" Header="Консуматив" Binding="{Binding consumableName}"/>
+                    <DataGridTextColumn x:Name="typeNameColumn" Width="*" Header="Тип" Binding="{Binding typeName}"/>
+                    <DataGridTextColumn x:Name="measuresNameColumn" Width="*" Header="Мярка" Binding="{Binding measuresName}"/>
+                    <DataGridTextColumn x:Name="type_idTypeColumn" Width="*" Header="Type id Type" Binding="{Binding Type_idType}" Visibility="Hidden"/>
+                    <DataGridTextColumn x:Name="measures_idMeasuresColumn" Width="*" Header="Measures id Measures" Binding="{Binding Measures_idMeasures}" Visibility="Hidden"/>
+                </DataGrid.Columns>
+                <DataGrid.Resources>
+                    <ContextMenu x:Key="contextMenu">
+                        <MenuItem Header="Добавяне на нов ред" Click="AddMeasure_Click" />
+
+
+                        <MenuItem Header="Редактиране на избрания ред" Click="editMeasure_Click" />
+
+                        <MenuItem Header="Изтриване на избрания ред" Click="deleteMeasure_Click" />
+                    </ContextMenu>
+                    <Style TargetType="DataGridRow">
+                        <Setter Property="ContextMenu" Value="{StaticResource contextMenu}"/>
+                    </Style>
+                    <Style TargetType="DataGrid">
+                        <Setter Property="Background">
+                            <Setter.Value>
+                                <LinearGradientBrush  StartPoint="0,0" EndPoint="0,1">
+                                    <GradientStop Offset="0" Color="#FF31577E"/>
+                                    <GradientStop Offset="0.5" Color="#FF5C99D6"/>
+                                    <GradientStop Offset="1" Color="White"  />
+                                </LinearGradientBrush>
+                            </Setter.Value>
+
+                        </Setter>
+                    </Style>
+                    <Style TargetType="DataGridColumnHeader">
+                        <Setter Property="FontSize" Value="20"/>
+                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                        <Setter Property="Background" Value="#FF31577E"/>
+                        <Setter Property="Foreground" Value="White"/>
+                    </Style>
+                    <Style TargetType="DataGridCell">
+                        <Setter Property="FontSize" Value="20"/>
+                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+
+                    </Style>
+                </DataGrid.Resources>
+            </DataGrid>
+
+
+
+
+
+
+
+
+        </Grid>
+    
+</Page>

@@ -1,0 +1,99 @@
+﻿
+    <Page x:Class="DiplomnaCarProject.BrandView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:DiplomnaCarProject" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="800"
+      Title="BrandView" Loaded="Page_Loaded">
+    <Page.Resources>
+        <local:DataSet1 x:Key="dataSet1"/>
+        
+        <CollectionViewSource x:Key="brandViewViewSource" Source="{Binding BrandView, Source={StaticResource dataSet1}}"/>
+    </Page.Resources>
+        
+        
+    
+        <materialDesign:TransitioningContent OpeningEffect="{materialDesign:TransitionEffect ExpandIn ,Duration=0:0:1}">
+
+
+
+        <Grid DataContext="{StaticResource brandViewViewSource}" >
+        <Grid.RowDefinitions>
+                <RowDefinition Height="32"/>
+                <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0">
+            <Menu Height="32"  >
+                    <MenuItem  Header="_Добави" Click="AddBrand_Click" Height="32">
+
+                </MenuItem>
+                    <MenuItem  Header="_Редактирай" Click="editBrand_Click" Height="32">
+
+                </MenuItem>
+                    <MenuItem  Header="_Изтрий" Click="deleteBrand_Click" Height="32">
+
+                </MenuItem>
+
+            </Menu>
+        </StackPanel>
+        
+                <DataGrid Grid.Row="1"  x:Name="modelDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource brandViewViewSource}}"   RowDetailsVisibilityMode="VisibleWhenSelected"  CanUserAddRows="False" IsReadOnly="True" >
+                <DataGrid.Columns>
+                    <DataGridTextColumn x:Name="idbrandColumn" Binding="{Binding idbrand}" Header="idbrand" Width="*" Visibility="Hidden" />
+                    <DataGridTextColumn x:Name="nameColumn" Binding="{Binding name}" Header="Марка" Width="*"/>
+                </DataGrid.Columns>
+                <DataGrid.Resources>
+                    <ContextMenu x:Key="contextMenu">
+                        <MenuItem Header="Добавяне на нов ред" Click="AddBrand_Click" />
+
+
+                        <MenuItem Header="Редактиране на избрания ред" Click="editBrand_Click" />
+
+                        <MenuItem Header="Изтриване на избрания ред" Click="deleteBrand_Click" />
+                    </ContextMenu>
+                    <Style TargetType="DataGridRow">
+                        <Setter Property="ContextMenu" Value="{StaticResource contextMenu}"/>
+                    </Style>
+
+                        <Style TargetType="DataGrid">
+                            <Setter Property="Background">
+                                <Setter.Value>
+                                    <LinearGradientBrush  StartPoint="0,0" EndPoint="0,1">
+                                        <GradientStop Offset="0" Color="#FF31577E"/>
+                                        <GradientStop Offset="0.5" Color="#FF5C99D6"/>
+                                        <GradientStop Offset="1" Color="White"  />
+                                    </LinearGradientBrush>
+                                </Setter.Value>
+
+                            </Setter>
+                        </Style>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="FontSize" Value="20"/>
+                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                            <Setter Property="Background" Value="#FF31577E"/>
+                            <Setter Property="Foreground" Value="White"/>
+                        </Style>
+                        <Style TargetType="DataGridCell">
+                            <Setter Property="FontSize" Value="20"/>
+                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+
+                        </Style>
+
+
+                    </DataGrid.Resources>
+            </DataGrid>
+       
+
+            
+
+
+        </Grid>
+
+    
+
+</materialDesign:TransitioningContent>
+</Page>
+

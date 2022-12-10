@@ -1,0 +1,112 @@
+﻿<Page
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:DiplomnaCarProject.View_Page"
+      xmlns:DiplomnaCarProject="clr-namespace:DiplomnaCarProject" x:Class="DiplomnaCarProject.View_Page.CarView"
+      mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="800"
+      Title="CarView"  Loaded="Page_Loaded" >
+
+    <Page.Resources>
+        <DiplomnaCarProject:DataSet1 x:Key="dataSet1"/>
+        <CollectionViewSource x:Key="carViewJoinViewSource" Source="{Binding carViewJoin, Source={StaticResource dataSet1}}"/>
+
+
+    </Page.Resources>
+
+    <Grid DataContext="{StaticResource carViewJoinViewSource}"  >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="32"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+
+
+
+
+        <StackPanel Grid.Row="0">
+            <Menu Height="32" >
+                <MenuItem  Header="_Профил" Click="Profile_Click" Height="32"/>
+                <MenuItem  Header="_Добави" Click="AddCar_Click" Height="32"/>
+                <MenuItem  Header="_Редактирай" Click="editCar_Click" Height="32"/>
+                <MenuItem  Header="_Изтрий" Click="deleteCar_Click" Height="32"/>
+
+            </Menu>
+        </StackPanel>
+
+
+
+        <StackPanel Grid.Row="1"/>
+        <DataGrid x:Name="carsDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}"  Grid.Row="1" RowDetailsVisibilityMode="VisibleWhenSelected"  IsReadOnly="True" >
+            <DataGrid.Columns>
+                <DataGridTextColumn x:Name="idcarsColumn" Binding="{Binding idcars}" Header="idcars" Width="SizeToHeader" Visibility="Hidden"/>
+                <DataGridTextColumn x:Name="modelColumn" Binding="{Binding model}" Header="Модел" Width="*"/>
+                <DataGridTextColumn x:Name="brandColumn" Binding="{Binding brand}" Header="Марка" Width="*"/>
+                <DataGridTextColumn x:Name="regNColumn" Binding="{Binding regN}" Header="Рег.Номер" Width="*"/>
+                <DataGridTextColumn x:Name="gorivoColumn" Binding="{Binding gorivo}" Header="Гориво" Width="*"/>
+                <DataGridTextColumn x:Name="colorColumn" Binding="{Binding color}" Header="Цвят" Width="*"/>
+                <DataGridTextColumn x:Name="vINColumn" Binding="{Binding VIN}" Header="ВИН" Width="*"/>
+                <DataGridTextColumn x:Name="engineNColumn" Binding="{Binding engineN}" Header="Отговорно лице" Width="*"/>
+                <DataGridTextColumn x:Name="model_idmodelColumn" Binding="{Binding model_idmodel}" Header="model idmodel" Width="SizeToHeader" Visibility="Hidden"/>
+                <DataGridTextColumn x:Name="fuel_idFuelColumn" Binding="{Binding Fuel_idFuel}" Header="Fuel id Fuel" Width="SizeToHeader" Visibility="Hidden"/>
+                <DataGridTextColumn x:Name="brand_idbrandColumn" Binding="{Binding brand_idbrand}" Header="brand idbrand" Width="SizeToHeader" Visibility="Hidden"/>
+                <DataGridTextColumn x:Name="idbrandColumn" Binding="{Binding idbrand}" Header="idbrand" Width="SizeToHeader" Visibility="Hidden"/>
+                <DataGridTextColumn x:Name="idmodelColumn" Binding="{Binding idmodel}" Header="idmodel" Width="SizeToHeader" Visibility="Hidden"/>
+                <DataGridTextColumn x:Name="idFuelColumn" Binding="{Binding idFuel}" Header="id Fuel" Width="SizeToHeader" Visibility="Hidden"/>
+            </DataGrid.Columns>
+            <DataGrid.Resources>
+                <ContextMenu x:Key="contextMenu">
+                    <MenuItem Header="Профил" Click="Profile_Click" />
+                    <MenuItem Header="Добавяне на нов ред" Click="AddCar_Click" />
+
+
+                    <MenuItem Header="Редактиране на избрания ред" Click="editCar_Click" />
+
+                    <MenuItem Header="Изтриване на избрания ред" Click="deleteCar_Click" />
+                </ContextMenu>
+                <Style TargetType="DataGridRow">
+                    <Setter Property="ContextMenu" Value="{StaticResource contextMenu}"/>
+                </Style>
+
+                <Style TargetType="DataGrid">
+                    <Setter Property="Background">
+                        <Setter.Value>
+                            <LinearGradientBrush  StartPoint="0,0" EndPoint="0,1">
+                                <GradientStop Offset="0" Color="#FF31577E"/>
+                                <GradientStop Offset="0.5" Color="#FF5C99D6"/>
+                                <GradientStop Offset="1" Color="White"  />
+                            </LinearGradientBrush>
+                        </Setter.Value>
+
+                    </Setter>
+                </Style>
+                <Style TargetType="DataGridColumnHeader">
+                    <Setter Property="FontSize" Value="20"/>
+                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                    <Setter Property="Background" Value="#FF31577E"/>
+                    <Setter Property="Foreground" Value="White"/>
+                </Style>
+                <Style TargetType="DataGridCell">
+                    <Setter Property="FontSize" Value="20"/>
+                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+
+                </Style>
+
+            </DataGrid.Resources>
+        </DataGrid>
+
+
+
+
+    </Grid>
+    <Page.Triggers>
+        <EventTrigger RoutedEvent="Loaded">
+            <BeginStoryboard>
+                <Storyboard Duration="00:00:3" Storyboard.TargetProperty="Opacity">
+                    <DoubleAnimation From="0" To="1"/>
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger>
+    </Page.Triggers>
+</Page>

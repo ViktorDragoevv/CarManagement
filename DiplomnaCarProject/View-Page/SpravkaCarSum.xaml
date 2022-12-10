@@ -1,0 +1,54 @@
+﻿<Page
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:DiplomnaCarProject.View_Page" xmlns:rv="clr-namespace:Microsoft.Reporting.WinForms;assembly=Microsoft.ReportViewer.WinForms"
+      xmlns:DiplomnaCarProject="clr-namespace:DiplomnaCarProject" x:Class="DiplomnaCarProject.View_Page.SpravkaCarSum"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="SpravkaCarSum" Loaded="Page_Loaded">
+
+    <Page.Resources>
+        <DiplomnaCarProject:DataSet1 x:Key="dataSet1"/>
+        <CollectionViewSource x:Key="carsViewSource" Source="{Binding cars, Source={StaticResource dataSet1}}"/>
+    </Page.Resources>
+
+    <Grid >
+        
+        <Grid.Resources>
+            <Style TargetType="{x:Type Grid}">
+                <Setter Property="Background">
+                    <Setter.Value>
+                        <LinearGradientBrush  StartPoint="0,0" EndPoint="0,1">
+                            <GradientStop Offset="0" Color="#FF31577E"/>
+                            <GradientStop Offset="0.5" Color="#FF5C99D6"/>
+                            <GradientStop Offset="1" Color="White"  />
+                        </LinearGradientBrush>
+                    </Setter.Value>
+
+                </Setter>
+            </Style>
+
+
+        </Grid.Resources>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="43"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <WindowsFormsHost    Grid.Row="1">
+            <rv:ReportViewer x:Name="reportViewer"  />
+        </WindowsFormsHost>
+
+        <Grid Background="white"  Height="44" VerticalAlignment="Top"  Grid.Row="0" DataContext="{StaticResource carsViewSource}">
+            <Button Content="Справка" HorizontalAlignment="Left" Margin="656,6,0,0" VerticalAlignment="Top" Width="103" Click="Button_Click"/>
+            <DatePicker SelectedDateFormat="Short" x:Name="dateTimePicker1" HorizontalAlignment="Left" Margin="44,9,0,0" VerticalAlignment="Top" Width="103"/>
+            <DatePicker SelectedDateFormat="Short" x:Name="dateTimePicker2" HorizontalAlignment="Left" Margin="209,10,0,0" VerticalAlignment="Top" Width="103"/>
+            <ComboBox x:Name="CBCar" HorizontalAlignment="Left" Margin="500,10,0,0" VerticalAlignment="Top" Width="120" SelectedValuePath="idcars" ItemsSource="{Binding}" DisplayMemberPath="regN" />
+            <CheckBox x:Name="checkBox1" Content="Филтър МПС" HorizontalAlignment="Left" Margin="342,12,0,0" VerticalAlignment="Top" Height="22" Width="112"/>
+            <Label Content="От" HorizontalAlignment="Left" Margin="3,10,0,0" VerticalAlignment="Top"/>
+            <Label Content="До" HorizontalAlignment="Left" Margin="168,10,0,0" VerticalAlignment="Top"/>
+        </Grid>
+
+    </Grid>
+</Page>

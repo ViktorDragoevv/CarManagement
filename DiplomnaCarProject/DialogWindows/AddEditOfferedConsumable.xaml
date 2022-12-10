@@ -1,0 +1,34 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DiplomnaCarProject.DialogWindows"
+        xmlns:DiplomnaCarProject="clr-namespace:DiplomnaCarProject" x:Class="DiplomnaCarProject.DialogWindows.AddEditOfferedConsumable"
+        mc:Ignorable="d"
+        Title="AddEditOfferedConsumable" Height="250" Width="400" Loaded="Window_Loaded">
+    <Window.Resources>
+        <DiplomnaCarProject:DataSet1 x:Key="dataSet1"/>
+        <CollectionViewSource x:Key="consumablesOfferedConsumableContractorsViewSource" Source="{Binding consumablesOfferedConsumableContractors, Source={StaticResource dataSet1}}"/>
+    </Window.Resources>
+    <Grid DataContext="{StaticResource consumablesOfferedConsumableContractorsViewSource}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="300"/>
+            <ColumnDefinition Width="60"/>
+        </Grid.ColumnDefinitions>
+        
+        <DataGrid x:Name="consumablesOfferedConsumableContractorsDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected"  ItemsSource="{Binding}" EnableRowVirtualization="True" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridCheckBoxColumn Header="izbor" Width="SizeToHeader" x:Name="checkboxDatagrid"/> 
+                <DataGridTextColumn x:Name="idConsumablesColumn" Width="SizeToHeader" Header="id Consumables" Binding="{Binding idConsumables}"/>
+                <DataGridTextColumn x:Name="nameColumn" Width="SizeToHeader" Header="name" Binding="{Binding name}"/>
+                <DataGridTextColumn x:Name="type_idTypeColumn" Width="SizeToHeader" Header="Type id Type" Binding="{Binding Type_idType}"/>
+                <DataGridTextColumn x:Name="measures_idMeasuresColumn" Width="SizeToHeader" Header="Measures id Measures" Binding="{Binding Measures_idMeasures}"/>
+                <DataGridTextColumn x:Name="notifyColumn" Width="SizeToHeader" Header="notify" Binding="{Binding notify}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button x:Name="b1" Content="Избор" Grid.Column="1" HorizontalAlignment="Left" Margin="6,56,-20,0" VerticalAlignment="Top" Width="75" Click="b1_Click"/>
+        <Button x:Name="b2" IsCancel="True" Content="Назад" Grid.Column="1" HorizontalAlignment="Left" Margin="10,153,-24,0" VerticalAlignment="Top" Width="75"/>
+
+    </Grid>
+</Window>

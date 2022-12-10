@@ -1,0 +1,51 @@
+﻿<Window x:Class="DiplomnaCarProject.AddEditBrand"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DiplomnaCarProject"
+        mc:Ignorable="d"
+        xmlns:l="clr-namespace:DiplomnaCarProject"
+        Title="AddEditBrand" Height="190" Width="300" WindowStartupLocation="CenterScreen"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
+    <Grid>
+
+        <Grid.Resources>
+            <local:NotEmptyValidationRule x:Key="c"/>
+            <l:NotEmptyValidationRule x:Key="cc"/>
+            <Style TargetType="Grid">
+                <Setter Property="Background">
+                    <Setter.Value>
+                        <LinearGradientBrush  StartPoint="0,0" EndPoint="0,1">
+
+
+                            <GradientStop Offset="0.1" Color="White"  />
+                            <GradientStop Offset="0.8" Color="#FF5C99D6"/>
+
+                        </LinearGradientBrush>
+                    </Setter.Value>
+
+                </Setter>
+            </Style>
+        </Grid.Resources>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="96*"/>
+            <ColumnDefinition Width="197*"/>
+        </Grid.ColumnDefinitions>
+        <TextBox   x:Name="textBoxBrand" HorizontalAlignment="Left" Height="42" Margin="26,38,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="244" FontSize="18" materialDesign:HintAssist.Hint="Марка" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" Grid.ColumnSpan="2">
+
+            <!--<Binding RelativeSource="{RelativeSource Self}" Path="Text" UpdateSourceTrigger="LostFocus">
+                    <Binding.ValidationRules>
+                        <l:NotEmptyValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>-->
+
+
+        </TextBox>
+
+
+        <Button Foreground="White" IsEnabled="True" x:Name="b1" Content="Добави" HorizontalAlignment="Left" Margin="97.5,117,0,0" VerticalAlignment="Top" Width="89" Click="Button_Click" Grid.Column="1"/>
+        <Button Foreground="white" IsCancel="True" x:Name="back" Content="Назад" HorizontalAlignment="Left" Margin="10,117,0,0" VerticalAlignment="Top" Width="75"/>
+
+    </Grid>
+</Window>
